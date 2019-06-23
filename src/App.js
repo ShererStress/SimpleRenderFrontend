@@ -14,7 +14,7 @@ class App extends Component {
     this.handleDownload = this.handleDownload.bind(this);
 
     this.state = {
-      currentVer: 0.01,
+      currentVer: 1.00,
       someData: "THE PAGE IS FUNCTIONAL",
       loggedUserData: {
         username: null,
@@ -186,7 +186,7 @@ class App extends Component {
         }
         <br/>
         <h2> Click to begin download: </h2>
-        <a href="./downloads/testReadme.txt" onClick={this.handleDownload} download>Download SimpleRender</a> (Ver {this.state.currentVer})
+        <a href="./downloads/SimpleRenderRoundTwo.exe" onClick={this.handleDownload} download>Download SimpleRender</a> (Ver {this.state.currentVer})
 
       </div>
     );
