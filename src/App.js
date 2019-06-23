@@ -15,7 +15,6 @@ class App extends Component {
 
     this.state = {
       currentVer: 1.00,
-      someData: "THE PAGE IS FUNCTIONAL",
       loggedUserData: {
         username: null,
         mostrecentver: null,
@@ -50,7 +49,7 @@ class App extends Component {
       password: this.state.formData.password,
     }
 
-    fetch(`http://localhost:3000/users`, {
+    fetch(`https://simple-render-backend-rails.herokuapp.com/users`, {
       body: JSON.stringify(userData),
       method: "POST",
       headers: {
@@ -74,7 +73,7 @@ class App extends Component {
       password: this.state.formData.password,
     }
 
-    fetch(`http://localhost:3000/users/logIn`, {
+    fetch(`https://simple-render-backend-rails.herokuapp.com/users/logIn`, {
       body: JSON.stringify(userData),
       method: "POST",
       headers: {
@@ -132,7 +131,7 @@ class App extends Component {
 
   handleDownload() {
     let userData = {currentVersion: this.state.currentVer,};
-    fetch(`http://localhost:3000/users/${this.state.loggedUserData.userDatabaseID}`, {
+    fetch(`https://simple-render-backend-rails.herokuapp.com/users/${this.state.loggedUserData.userDatabaseID}`, {
       body: JSON.stringify(userData),
       method: "PUT",
       headers: {
@@ -155,24 +154,21 @@ class App extends Component {
     });
   };
 
-
-  //Add a random text file to download via a link
-  //Connect to backend with create/login/logout
-  //Check for current version
-
   render() {
     return (
       <div>
-        <h1> {this.state.someData} </h1>
-
+        <h1> SimpleRender Download page </h1>
 
         { this.state.loggedUserData.username === null ?
-          <form>
-            Username: <input onChange={this.handleFormUpdate} type="text" name="username" value={this.state.formData.username}></input> <br/>
-            Password: <input onChange={this.handleFormUpdate} type="password" name="password" value={this.state.formData.password}></input> <br/>
-            <button onClick={this.handleCreateUser}> Create New Account </button>
-            <button onClick={this.handleLogIn}> Log In </button>
-          </form>
+          <div>
+            <h2> Create and use an account to keep track of which verison you most recently downloaded </h2>
+            <form>
+              Username: <input onChange={this.handleFormUpdate} type="text" name="username" value={this.state.formData.username}></input> <br/>
+              Password: <input onChange={this.handleFormUpdate} type="password" name="password" value={this.state.formData.password}></input> <br/>
+              <button onClick={this.handleCreateUser}> Create New Account </button>
+              <button onClick={this.handleLogIn}> Log In </button>
+            </form>
+          </div>
         :
           <div>
             <h2> Welcome, {this.state.loggedUserData.username} <button onClick={this.handleLogOut}> Log Out</button></h2>
