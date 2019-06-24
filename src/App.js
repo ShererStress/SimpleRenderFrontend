@@ -130,28 +130,28 @@ class App extends Component {
   };
 
   handleDownload() {
-    let userData = {currentVersion: this.state.currentVer,};
-    fetch(`https://simple-render-backend-rails.herokuapp.com/users/${this.state.loggedUserData.userDatabaseID}`, {
-      body: JSON.stringify(userData),
-      method: "PUT",
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    }).then(data => {
-
-      this.setState( (prevState) => {
-        return {
-          loggedUserData: Object.assign(
-            {},
-            prevState.loggedUserData,
-            {mostrecentver: prevState.currentVer}
-          )
+    if(this.state.loggedUserData.username != null) {
+      let userData = {currentVersion: this.state.currentVer,};
+      fetch(`https://simple-render-backend-rails.herokuapp.com/users/${this.state.loggedUserData.userDatabaseID}`, {
+        body: JSON.stringify(userData),
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
         }
-      })
-
-      return data.json();
-    });
+      }).then(data => {
+        this.setState( (prevState) => {
+          return {
+            loggedUserData: Object.assign(
+              {},
+              prevState.loggedUserData,
+              {mostrecentver: prevState.currentVer}
+            )
+          }
+        })
+        return data.json();
+      });
+    }
   };
 
   render() {
